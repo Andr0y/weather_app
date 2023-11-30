@@ -36,8 +36,9 @@ app.get('/api/cities/:countryCode', (req, res) => {
     });
 });
 
-app.listen(5000, () => {
-    console.log("Server is running");
+const PORT = process.env.port || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
 
 app.get('*', (req, res) => {
