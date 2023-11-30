@@ -1,15 +1,15 @@
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
-const exp = require('constants');
+const path = require('path');
 
 const app = express();
 
 app.use(cors());
+//authentication
+app.use(express.static("client/build"));
 
-app.use(express.static("./client/build/index.html"))
-
-app.get("/countries", (req, res) => {
+app.get("/api/countries", (req, res) => {
     fs.readFile("countries.json", "utf8", (err, data) => {
         if (err) {
             res.send("Error with reading file");
@@ -20,7 +20,7 @@ app.get("/countries", (req, res) => {
     });
 });
 
-app.get('/cities/:countryCode', (req, res) => {
+app.get('/api/cities/:countryCode', (req, res) => {
     const countryCode = req.params.countryCode;
 
     fs.readFile('cities500.json', 'utf8', (err, data) => {
@@ -36,10 +36,10 @@ app.get('/cities/:countryCode', (req, res) => {
     });
 });
 
-app.all("*", (req, res) => {
-    res.status(404).send("Doesn't exist");
-})
-
 app.listen(5000, () => {
     console.log("Server is running");
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });

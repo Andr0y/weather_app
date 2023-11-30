@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 function useMyData() {
-    const baseUrl = "http://localhost:5000/";
+    const baseUrl = "/api/";
 
     const getCountries = async () => {
         const url = `${baseUrl}countries`;
