@@ -4,8 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "install-client": "cd client && npm install",
         "build-react": "cd client && npm run build",
-        "prestart": "npm run build-react",
+        "prestart": "npm run install-client && npm run build-react",
         "start": "node app.js",
         "dev": "nodemon app.js"
     },
